@@ -1,0 +1,105 @@
+main {
+  display: flex;
+  background-color: rgb(224, 224, 224);
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 40px;
+}
+
+.container {
+  background-color: rgb(18, 146, 252);
+  width: 30%;
+  text-align: center;
+  padding-top: 80px;
+  color: white;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+img {
+  width: 40%;
+}
+
+#copyright {
+  margin-top: 500px;
+}
+
+.left-side {
+  background-color: white;
+  border-radius: 30px;
+  padding-left: 50px;
+  padding-top: 40px;
+  text-align: left;
+  width: 70%;
+  margin-left: -30px;
+}
+
+.flex-div {
+  display: inline-flex;
+  margin-left: 100px;
+  line-height: 1.7rem;
+}
+
+.margin-left {
+  margin-left: 78px;
+}
+
+.title {
+  width: 75%;
+}
+
+.bold-text {
+  font-weight: 700;
+}
+
+.gray-p {
+  color: rgb(194, 192, 192);
+}
+
+.aling-right {
+  text-align: right;
+  margin-right: 80px;
+}
+
+.coding-skills {
+  padding-bottom: 70px;
+}
+
+.skill-line {
+  border: 1px solid rgb(0, 110, 255);
+  border-radius: 20px;
+  height: 1.5vh;
+  width: 90%;
+}
+
+.flex-skill {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.procent-line {
+  background-color: rgb(0, 162, 255);
+  border: 1px solid aqua;
+  width: 95%;
+  padding-top: 6px;
+  margin-top: 2.5px;
+  margin-left: 2px;
+  border-radius: 30px;
+}
+
+.php {
+  width: 85%;
+}
+
+.htmlcss {
+  width: 99.5%;
+}
+
+.smartytwig {
+  width: 75%;
+}
+
+.perl {
+  width: 90%;
+}
