@@ -31,6 +31,7 @@ function generateSkill(skill) {
 
   const procentLine = document.createElement('p');
   procentLine.classList.add('procent-line');
+  procentLine.style.width = `${skill.level}%`;
   const skillLine = document.createElement('div');
   skillLine.classList.add('skill-line');
 
@@ -41,9 +42,6 @@ function generateSkill(skill) {
 }
 
 function generateExperience(data) {
-  // const sectionName = document.createElement('h3');
-  // sectionName.textContent = 'Experience';
-
   const containerDiv = document.createElement('div');
   containerDiv.classList.add('flex-div', 'margin-left');
 
