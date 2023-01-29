@@ -1,37 +1,84 @@
-const experienceURL = 'https://zany-skitter-caper.glitch.me/experiences';
-const skillsURL = 'https://zany-skitter-caper.glitch.me/skills';
+const EXPERIENCE_ENDPOINT = 'https://zany-skitter-caper.glitch.me/experiences';
+const SKILLS_ENDPOINT = 'https://zany-skitter-caper.glitch.me/skills';
 
-const experiences = await getExperience();
+const skillsSection = document.querySelector('.coding-skills');
+const experiencesSection = document.querySelector('#experience');
 
-experiences.forEach((experience) => {
-  generateExperience(experience);
-});
+async function getData() {
+  const skillsRequest = fetch(SKILLS_ENDPOINT);
+  const experiencesRequest = fetch(EXPERIENCE_ENDPOINT);
 
-async function getExperience() {
-  const res = await fetch(experienceURL);
-  const data = await res.json();
-  console.log(data);
-  return data;
+  const [skillsRes, experiencesRes] = await Promise.all([
+    skillsRequest,
+    experiencesRequest,
+  ]);
+  const skills = await skillsRes.json();
+  const experiences = await experiencesRes.json();
+
+  experiences.forEach((exp) => generateExperience(exp));
+  skills.forEach((sk) => generateSkill(sk));
+
+  console.log(skills, experiences);
 }
 
-// companyName: 'Microsoft';
-// description: 'Working on multiple projects including but not limited to Teams, Office 365 and Azure';
-// finishYear: 2015;
-// position: 'Developer';
-// startYear: 2013;
+function generateSkill(skill) {
+  const title = document.createElement('p');
+  title.classList.add('flex-skill');
+  title.textContent = skill.title;
+  const skillProcent = document.createElement('span');
+  skillProcent.textContent = skill.level + '%';
+  const titleContainter = document.createElement('p');
 
-function generateExperience(experience) {
-  const container = document.querySelector('.aling-right');
-  const descriptionPlace = document.querySelector('.flex-div');
+  const procentLine = document.createElement('p');
+  procentLine.classList.add('procent-line');
+  const skillLine = document.createElement('div');
+  skillLine.classList.add('skill-line');
 
-  const finishStartYear = document.querySelector('.bold-text');
-  finishStartYear.textContent = `Work Years ${experience.startYear} - ${experience.finishYear} `;
-  const description = document.querySelector('.title');
-  description.textContent = experience.description;
-  const position = document.querySelector('.bold-text-position');
-  position.textContent = experience.position;
-
-  container.append(finishStartYear);
-  descriptionPlace.append(description);
-  des.append(position);
+  title.append(skillProcent);
+  skillLine.append(procentLine);
+  titleContainter.append(title);
+  skillsSection.append(titleContainter, skillLine);
 }
+
+function generateExperience(data) {
+  // const sectionName = document.createElement('h3');
+  // sectionName.textContent = 'Experience';
+
+  const containerDiv = document.createElement('div');
+  containerDiv.classList.add('flex-div', 'margin-left');
+
+  const companyAndYearContainer = document.createElement('p');
+  companyAndYearContainer.classList.add('aling-right');
+
+  const positionAndDescriptionContainer = document.createElement('p');
+  positionAndDescriptionContainer.classList.add('title');
+  const postionStyleDiv = document.createElement('span');
+  postionStyleDiv.classList.add('bold-text');
+
+  const workTimePar = document.createElement('span');
+  workTimePar.classList.add('bold-text');
+  workTimePar.textContent = `${data.startYear} - ${data.finishYear} `;
+
+  const companyNamePar = document.createElement('span');
+  companyNamePar.classList.add('gray-p');
+  companyNamePar.textContent = data.companyName;
+
+  const positionPar = document.createElement('p');
+  positionPar.classList.add('bold-text');
+  positionPar.textContent = data.position;
+
+  const descriptionPar = document.createElement('p');
+  descriptionPar.textContent = data.description;
+
+  companyAndYearContainer.append(workTimePar, companyNamePar);
+  positionAndDescriptionContainer.append(
+    postionStyleDiv,
+    positionPar,
+    descriptionPar
+  );
+
+  containerDiv.append(companyAndYearContainer, positionAndDescriptionContainer);
+  experiencesSection.append(containerDiv);
+}
+
+getData();
